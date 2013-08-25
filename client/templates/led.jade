@@ -1,0 +1,20 @@
+.row
+  .twelve.columns
+
+    h1 RGB LED
+    p
+      label red LED
+        input(type='number', min='0', max='255', ng:model='led.r')
+    p
+     label green LED
+        input(type='number', min='0', max='255', ng:model='led.g')
+
+    p
+     label blue LED
+        input(type='number', min='0', max='255', ng:model='led.b')
+    p
+       input.button.right(ng-show='true', 
+                           type='submit'
+                           value='Send'
+                           ng-click='sendLedData()' )
+    pre {{led}}
