@@ -1,21 +1,37 @@
 state = require '../../server/state'
 level = require 'level'
 
-db = level './storage', {}, (err) ->
-  throw err  if err
-  if true
-    console.log 'db opened', db.db.getProperty 'leveldb.stats'
-    db.db.approximateSize ' ', '~', (err, size) ->
-      throw err  if err
-      console.log 'storage size ~ %d bytes', size
+db = state.db
 
-processValue = (obj, oldObj) ->
-  dbkey = "reading~#{obj.key}~#{obj.time}"
-  db.put dbkey, obj.origval, (err) ->
+archiveValue = (time, param, value) ->
+  dbkey = "reading~#{param}~#{time}"
+  db.put dbkey, value, (err) ->
     throw err  if err
+
+storeValue = (obj, oldObj) ->
+  if obj? #therwise error on resetStatus
+    archiveValue obj.time, obj.key, obj.origval
 
 module.exports = class
   constructor: ->
-    state.on 'set.status', processValue
+    state.on 'set.status', storeValue
+    state.on 'reprocess.status', archiveValue
+
   destroy: ->
-    state.off 'set.status', processValue
+    state.off 'set.status', storeValue
+    state.off 'reprocess.status', archiveValue
+
+  @rawRange: (key, from, to, cb) ->
+    now = Date.now()
+    from += now  if from < 0
+    to += now  if to <= 0
+    prefix = "reading~#{key}~"
+    results = []
+    s = db.createReadStream start: prefix + from, end: prefix + to
+    s.on 'data', (data) ->
+      results.push +data.value
+      results.push +data.key.substr prefix.length
+    s.on 'error', (err) ->
+      cb err
+    s.on 'end', ->
+      cb null, results

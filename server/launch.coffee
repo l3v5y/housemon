@@ -28,7 +28,6 @@ briqs.loadAll ->
 # Hook state management into SocketStream
 ss.api.add 'fetch', state.fetch
 ss.api.add 'store', state.store
-ss.api.add 'saveNow', state.saveNow
 state.on 'publish', (hash, value) ->
   ss.api.publish.all 'ss-store', hash, value
   
@@ -44,7 +43,7 @@ ss.http.route '/', (req, res) ->
 
 # Persistent sessions and storage based on Redis
 # TODO replace redis by LevelDB, https://github.com/rvagg/node-level-session
-ss.session.store.use 'redis', local.redisConfig
+#ss.session.store.use 'redis', local.redisConfig
 # ss.publish.transport.use 'redis', local.redisConfig
 collections = ['bobs','readings','locations','drivers','uploads','status']
 state.setupStorage collections, local.redisConfig, ->
@@ -82,10 +81,7 @@ ss.http.middleware.prepend (req, res, next) ->
   state.emit 'upload', req.url, req.files  unless _.isEmpty req.files
   next()
 
-# TODO find a way to put this code inside briqs, the archiver briq in this case
-# support downloads from the "archive/" folder
-ss.http.middleware.append '/archive', ss.http.connect.directory './archive'
-ss.http.middleware.append '/archive', ss.http.connect.static './archive'
+# TODO find a way to put this code inside briqs, the logger briq in this case
 # support downloads from the "logger/" folder
 ss.http.middleware.append '/logger', ss.http.connect.directory './logger'
 ss.http.middleware.append '/logger', ss.http.connect.static './logger'
