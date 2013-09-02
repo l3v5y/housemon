@@ -3,7 +3,6 @@
 ss = require 'socketstream'
 fs = require 'fs'
 local = require '../local'
-npm = require 'npm'
 
 # briqs configuration settings can now be found in local.json, under key "briqs"
 briqConfig = local.briqs or {}
@@ -33,7 +32,6 @@ module.exports = (state) ->
       briq = state.models.briqs[obj.briq_id]
       if briq?
         console.info 'install briq', obj.key
-        ss.api.add name, briq[name]  for name in briq.info.rpcs ? []
         # TODO nasty: the incoming obj is only used to copy some settings from
         # the actually installed bob is created using the briq's factory method
         installed[obj.key] ?= {}
@@ -46,7 +44,10 @@ module.exports = (state) ->
             factory = briq.factory
             # special case: strings cause delayed loading, i.e. lazy require's
             if factory.constructor is String
-              factory = require "../briqs/#{obj.key}/#{factory}"
+              # FIXME: factory/factory is *NOT* the right path, hacked for now
+              factory = require "../briqs/#{factory}/#{factory}"
+            for name in briq.info.rpcs ? []
+              ss.api.add name, factory[name]
             bob = new factory(args...)
             bob.bobInfo?(obj) #who we are (for self referencing if we have the bobInfo method)
             #lightbulb - if we have a briq config json, we see if we need to set debug flags
@@ -84,8 +85,7 @@ module.exports = (state) ->
     fs.readdir './briqs', (err, files) ->
       throw err  if err
       loadFile f  for f in files
-      npm.load ->
-        cb()
+      cb()
       # TODO: need newer node.js to use fs.watch on Mac OS X
       #  see: https://github.com/joyent/node/issues/3343
       # fs.watch './briqs', (event, filename) ->
