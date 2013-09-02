@@ -1,6 +1,4 @@
-/archive/
 /client/static/assets/
-/histdata/
 /logger/
 /node_modules/
 /storage/
@@ -8,6 +6,4 @@
 /briqs/nodeMap-local.coffee
 /housemon.log
 /briqs.json
-
-
 dump.rdb
