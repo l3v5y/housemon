@@ -1,10 +1,13 @@
 !!!
+block vars
+  title = 'Primus Live'
+
 html(lang='en')
   head
     meta(charset='utf-8')
     style [ng-cloak] { display: none; }
     
-    title Primus Live
+    title #{title}
     
     block styles
       link(rel='stylesheet',href='/main/style.css')
