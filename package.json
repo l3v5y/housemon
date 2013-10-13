@@ -17,7 +17,7 @@
     "primus-live": "~0.3.4"
   },
   "devDependencies": {
-    "chai": "~1.7.2",
+    "chai": "~1.8.1",
     "mocha": "~1.13.0",
     "sinon": "~1.7.3",
     "coffee-script": "~1.6.3"

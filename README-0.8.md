@@ -6,6 +6,13 @@ There are no dependencies other than node 0.10.x:
 npm install
 node .
 ```
+To update to the latest code from GitHub, also force a refresh as follows:
+
+```
+git pull
+rm -rm node_modules bower_components
+npm install
+```
 
 Some stuff is hard-coded, see `app/process/host.coffee`.
 
