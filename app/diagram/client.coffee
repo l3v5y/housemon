@@ -2,13 +2,13 @@ ng = angular.module 'myApp'
 
 ng.config ($stateProvider, navbarProvider) ->
   $stateProvider.state 'diagram',
-    url: '/vdiagram'
-    templateUrl: 'vdiagram/view.html'
+    url: '/diagram'
+    templateUrl: 'diagram/view.html'
     controller: 'DiagramCtrl'
-  navbarProvider.add '/vdiagram', 'Diagram', 34
+  navbarProvider.add '/diagram', 'Diagram', 34
 
 ng.controller 'DiagramCtrl', ->
-  diagram = createDiagramEditor('vdiagram')
+  diagram = createDiagramEditor('diagram')
     .addNode
       name: 'Oscillator'
       x: 50

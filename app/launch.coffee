@@ -1,4 +1,6 @@
 module.exports = (app) ->
+  # specify which modules need to be loaded first, and in what order
+  app.config.loadFirst = ['main']
   
   app.on 'setup', ->
     console.log "plugins: #{Object.keys(@config.plugin)}"
