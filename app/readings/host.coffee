@@ -23,9 +23,10 @@ class StatusTable extends stream.Writable
       {type,tag,time,msg} = data
       if type? and tag? and time? and msg?
         batch = @db.batch()
+        opt = { valueEncoding: 'json' }
         for name, value of msg
           key = "#{type}/#{tag}/#{name}"
-          batch.put "status~#{key}", { key, name, value, type, tag, time }
+          batch.put "status~#{key}", { key, name, value, type, tag, time }, opt
         batch.write done
       else
         console.warn 'status table data ignored', data
