@@ -14,7 +14,7 @@ rm -rf node_modules bower_components
 npm install
 ```
 
-Some stuff is hard-coded, see `app/process/host.coffee`.
+Some stuff is hard-coded, see `app/main/host.coffee`.
 
 *Work-in-progress... what follows are some early developer notes.*
 
