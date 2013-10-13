@@ -10,7 +10,7 @@ To update to the latest code from GitHub, also force a refresh as follows:
 
 ```
 git pull
-rm -rm node_modules bower_components
+rm -rf node_modules bower_components
 npm install
 ```
 
