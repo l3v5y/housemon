@@ -55,3 +55,6 @@ module.exports = (app, plugin) ->
           .pipe(new Parser)
           .pipe(new Dispatcher)
           .pipe(new ReadingLog app.db)
+
+      jeelink
+          .pipe(new StatusTable app.db)
