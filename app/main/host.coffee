@@ -1,6 +1,7 @@
 module.exports = (app, plugin) ->
   
   app.register 'nodemap.rf12-868,42,2', 'testnode'
+  app.register 'nodemap.rf12-868,100,2', 'tmp36'
   
   app.register 'nodemap.rf12-2', 'roomnode'
   app.register 'nodemap.rf12-3', 'radioblip'
@@ -46,7 +47,7 @@ module.exports = (app, plugin) ->
     readings
       .pipe(new StatusTable app.db)
 
-    jeelink = new Serial('usb-A900ad5m').on 'open', ->
+    jeelink = new Serial('usb-A1014KGA').on 'open', ->
 
       jeelink # log raw data to file, as timestamped lines of text
           .pipe(new Logger) # sink, can't chain this further
