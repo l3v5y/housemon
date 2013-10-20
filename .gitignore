@@ -1,9 +1,4 @@
-/client/static/assets/
-/logger/
-/node_modules/
-/storage/
-/uploads/
-/briqs/nodeMap-local.coffee
-/housemon.log
-/briqs.json
-dump.rdb
+bower_components
+node_modules
+/logger
+/storage
