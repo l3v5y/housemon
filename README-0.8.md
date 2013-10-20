@@ -146,7 +146,7 @@ registered drivers is available as `app.registry.drivers`.
 The mapping from RF12 group + node ID's is done with `nodemap` registry entries:
 
 ```coffee
-app.register 'nodemap.rf12-868:42:2', 'testnode'
+app.register 'nodemap.rf12-868,42,2', 'testnode'
 ```
 
 Using the nodemap entries, each incoming packet will be dispatched to the proper
