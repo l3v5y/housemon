@@ -1,23 +1,8 @@
 module.exports = (app, plugin) ->
   
-  app.register 'nodemap.rf12-868,42,2', 'testnode'
-  app.register 'nodemap.rf12-868,100,2', 'tmp36'
-  
-  app.register 'nodemap.rf12-2', 'roomnode'
-  app.register 'nodemap.rf12-3', 'radioblip'
-  app.register 'nodemap.rf12-4', 'roomnode'
-  app.register 'nodemap.rf12-5', 'roomnode'
-  app.register 'nodemap.rf12-6', 'roomnode'
-  app.register 'nodemap.rf12-9', 'homepower'
-  app.register 'nodemap.rf12-10', 'roomnode'
-  app.register 'nodemap.rf12-11', 'roomnode'
-  app.register 'nodemap.rf12-12', 'roomnode'
-  app.register 'nodemap.rf12-13', 'roomnode'
-  app.register 'nodemap.rf12-15', 'smarelay'
-  app.register 'nodemap.rf12-18', 'p1scanner'
-  app.register 'nodemap.rf12-19', 'ookrelay'
-  app.register 'nodemap.rf12-23', 'roomnode'
-  app.register 'nodemap.rf12-24', 'roomnode'
+  config = require('./config');
+
+  app.register node.id, node.driver for node in config.nodes
 
   app.on 'running', ->
     Logger = @registry.sink.logger
@@ -47,7 +32,7 @@ module.exports = (app, plugin) ->
     readings
       .pipe(new StatusTable app.db)
 
-    jeelink = new Serial('usb-A1014KGA').on 'open', ->
+    jeelink = new Serial(config.serialDevice).on 'open', ->
 
       jeelink # log raw data to file, as timestamped lines of text
           .pipe(new Logger) # sink, can't chain this further

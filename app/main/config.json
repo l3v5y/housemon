@@ -1,0 +1,73 @@
+{
+  "serialDevice": "usb-A1014KGA",
+  "nodes": [
+    {
+      "id": "nodemap.rf12-868,42,2",
+      "driver": "testnode"
+    },
+    {
+      "id": "nodemap.rf12-868,100,2",
+      "driver": "tmp36"
+    },
+    {
+      "id": "nodemap.rf12-2",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-3",
+      "driver": "radioblip"
+    },
+    {
+      "id": "nodemap.rf12-4",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-5",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-6",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-9",
+      "driver": "homepower"
+    },
+    {
+      "id": "nodemap.rf12-10",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-11",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-12",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-13",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-15",
+      "driver": "smarelay"
+    },
+    {
+      "id": "nodemap.rf12-18",
+      "driver": "p1scanner"
+    },
+    {
+      "id": "nodemap.rf12-19",
+      "driver": "ookrelay"
+    },
+    {
+      "id": "nodemap.rf12-23",
+      "driver": "roomnode"
+    },
+    {
+      "id": "nodemap.rf12-24",
+      "driver": "roomnode"
+    }
+  ]
+}
